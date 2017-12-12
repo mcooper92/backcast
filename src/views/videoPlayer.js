@@ -1,17 +1,17 @@
 var VideoPlayerView = Backbone.View.extend({
 
+  // from app.js: 
+  // el: '.player'
+  // collection: videos 
+  // when invoked from model.select(), model: video
 
   render: function() {
     this.$el.html('<div class="loading">Please wait...</div>');
 
     this.$el.html(this.template());
 
-    // probably need to update to selected video
-    var video = new Video(window.exampleVideoData[0]);
-
-
-
-    // var videoView = new VideoListEntryView({ model: video });
+    var video = this.model || this.collection.models[0];
+    
 
     var title = video.attributes.snippet.title;
     var description = video.attributes.snippet.description;
@@ -21,7 +21,6 @@ var VideoPlayerView = Backbone.View.extend({
     this.$el.find('h3.title').text(title);
     this.$el.find('div.description').text(description);
 
-    console.log(this.$el);
 
     return this.$el;
   },
